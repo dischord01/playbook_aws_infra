@@ -1,0 +1,7 @@
+# file: inventory
+
+[all]
+
+
+[local_target]
+localhost  ansible_connection=local  ansible_python_interpreter='/usr/bin/env python'

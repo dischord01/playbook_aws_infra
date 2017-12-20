@@ -1,0 +1,4 @@
+---
+- src: https://github.com/dischord01/aws_infra_ansible.git
+  version: master
+  name: aws_infra_ansible
