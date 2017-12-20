@@ -2,7 +2,7 @@
 ---
 
 - name: AWS Infrastucture using Ansible 
-  hosts: local_target
+  hosts: localhost
   roles:
   - { role: aws_infra_ansible, vpc_state: 'create' }
 
