@@ -7,9 +7,9 @@
 #      Prefixed to all resources for cleanup & identifcation.
 #######################################################################################
 
-workshop_prefix:                     "public-sector-tower"
+workshop_prefix:                     "demo-tower-workshop"
 owner_email:                         "bsollar@redhat.com"
-expiration_date:                     "n/a"
+expiration_date:                     "12/22/2017"
 
    
 #######################################################################################
