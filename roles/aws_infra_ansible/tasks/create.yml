@@ -146,31 +146,31 @@
 
 
 #---------------------------------------------------
-#  SSH Key
+#  SSH Key (USE TOWER CREDINTIAL)
 #---------------------------------------------------
-- name: Check for existing key and remove
-  ec2_key: name="{{ workshop_prefix }}-private-key" region="{{ aws_region }}" state=absent
-  tags:
-    - vpc_create
+# - name: Check for existing key and remove
+#   ec2_key: name="{{ workshop_prefix }}-private-key" region="{{ aws_region }}" state=absent
+#   tags:
+#     - vpc_create
 
-- name: Create EC2 keypair
-  ec2_key: name="{{ workshop_prefix }}-private-key" region="{{ aws_region }}" state=present
-  register: ssh_key
-  tags:
-    - vpc_create
+# - name: Create EC2 keypair
+#   ec2_key: name="{{ workshop_prefix }}-private-key" region="{{ aws_region }}" state=present
+#   register: ssh_key
+#   tags:
+#     - vpc_create
 
-- debug: 
-    var: ssh_key
-  tags:
-    - vpc_create
+# - debug: 
+#     var: ssh_key
+#   tags:
+#     - vpc_create
 
-- name: Create ssh keypair
-  copy: 
-    content: "{{ ssh_key.key.private_key }}"
-    dest:    "{{ ssh_key_path }}/{{ workshop_prefix }}-private-key"
-    mode:    0400
-  tags:
-    - vpc_create
+# - name: Create ssh keypair
+#   copy: 
+#     content: "{{ ssh_key.key.private_key }}"
+#     dest:    "{{ ssh_key_path }}/{{ workshop_prefix }}-private-key"
+#     mode:    0400
+#   tags:
+#     - vpc_create
 
 #---------------------------------------------------
 #  EC2 Master
