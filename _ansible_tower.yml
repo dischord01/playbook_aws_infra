@@ -11,6 +11,6 @@
     - { role: subscription_manager }
     - { role: epel                 }
     - { role: nodejs               }
-    - { role: ansible.tower        }
+    - { role: ansible_tower        }
     - { role: zsh                  } 
     - { role: wetty                }
