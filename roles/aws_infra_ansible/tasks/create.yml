@@ -228,7 +228,7 @@
 
 
 - pause:
-    seconds: 20
+    minutes: 1
 
 
 
