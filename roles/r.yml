@@ -30,3 +30,7 @@
 - src: https://github.com/dischord01/nodejs_app.git
   version: master
   name: nodejs_app
+
+- src: https://github.com/dischord01/mongodb.git
+  version: master
+  name: mongodb
