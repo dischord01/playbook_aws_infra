@@ -26,3 +26,7 @@
 - src: https://github.com/dischord01/wetty.git
   version: master
   name: wetty
+
+- src: https://github.com/dischord01/nodejs_app.git
+  version: master
+  name: nodejs_app
