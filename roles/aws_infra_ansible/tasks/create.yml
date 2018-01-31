@@ -187,8 +187,7 @@
     vpc_subnet_id:    "{{ aws_subnet_id }}"
     instance_tags:    "{{ ec2_master_tag }}"
     exact_count:      "{{ ec2_exact_count }}"    
-    count_tag:
-      Name:           "master"
+    count_tag:        "master"
     volumes:
       - device_name: /dev/xvda
         volume_type: gp2
@@ -214,8 +213,7 @@
     vpc_subnet_id:    "{{ aws_subnet_id }}"
     instance_tags:    "{{ ec2_node_tag }}"
     exact_count:      "{{ ec2_exact_count }}"    
-    count_tag:
-      Name:           "node"
+    count_tag:        "node"
     volumes:
       - device_name: /dev/xvda
         volume_type: gp2
