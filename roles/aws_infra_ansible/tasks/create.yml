@@ -187,8 +187,8 @@
     vpc_subnet_id:    "{{ aws_subnet_id }}"
     instance_tags:    "{{ ec2_master_tag }}"
     exact_count:      "{{ ec2_exact_count }}"    
-    # count_tag:
-    #   Name:           "{{ workshop_prefix + '-master-count-tag' + item }}"
+    count_tag:
+      Name:           "master"
     volumes:
       - device_name: /dev/xvda
         volume_type: gp2
@@ -215,7 +215,7 @@
     instance_tags:    "{{ ec2_node_tag }}"
     exact_count:      "{{ ec2_exact_count }}"    
     count_tag:
-      Name:           "{{ workshop_prefix + '-node-count-tag' + item }}"
+      Name:           "node"
     volumes:
       - device_name: /dev/xvda
         volume_type: gp2
