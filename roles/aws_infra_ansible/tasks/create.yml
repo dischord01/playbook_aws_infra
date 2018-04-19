@@ -205,10 +205,10 @@
     var: ec2.results
 
 - debug: 
-    var: ec2.results[]
+    var: ec2.results['instances'].public_ip
 
 - set_fact:
-    public_ip: "{{ ec2|json_query('results[*].instances.public_ip') }}"
+    public_ip: "{{ ec2.results|json_query('instances.public_ip') }}"
 
 - debug: 
     var: public_ip
@@ -218,7 +218,7 @@
     name: "{{ item.public_ip }}"
     groups: new_host
     ansible_user: "{{ system_user }}"
-  with_items: "{{ ec2.results.instances }}"
+  with_items: "{{ ec2.results['instances'] }}"
   tags:
     - vpc_create
 
