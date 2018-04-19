@@ -194,7 +194,7 @@
         volume_size: 15
         delete_on_termination: true
   with_sequence: count="{{ ec2_sequence }}"
-  register: ec2_master
+  register: ec2
   tags:
     - vpc_create
 
