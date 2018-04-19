@@ -4,7 +4,7 @@
   connection: local
   gather_facts: false
   roles:
-  - { role: aws_infra_ansible, vpc_state: 'create' }
+  - aws_infra_ansible
 
 
 

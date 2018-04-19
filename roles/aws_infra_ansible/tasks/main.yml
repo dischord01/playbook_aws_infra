@@ -4,7 +4,7 @@
 #####################################################
 # VPC Create / Destroy:
 #####################################################
-- include_tasks: "{{ aws_vpc_state }}.yml"
+- include_tasks: create.yml"
 
 
 
