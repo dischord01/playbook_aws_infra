@@ -7,7 +7,7 @@
 #      Prefixed to all resources for cleanup & identifcation.
 #######################################################################################
 
-workshop_prefix:                     "demo-tower-workshop"
+workshop_prefix:                     "demo-sollar"
 owner_email:                         "bsollar@redhat.com"
 expiration_date:                     "12/22/2017"
 
