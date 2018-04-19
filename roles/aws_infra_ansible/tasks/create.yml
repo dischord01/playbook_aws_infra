@@ -201,6 +201,18 @@
 - debug: 
     var: ec2
 
+- debug: 
+    var: ec2.results
+
+- debug: 
+    var: ec2.results[]
+
+- set_fact:
+    public_ip: "{{ ec2|json_query('results[*].instances.public_ip') }}"
+
+- debug: 
+    var: public_ip
+
 - name: Add new ec2 instance to inventory
   add_host:
     name: "{{ item.public_ip }}"
