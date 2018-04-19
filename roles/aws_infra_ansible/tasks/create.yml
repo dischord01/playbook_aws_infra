@@ -218,7 +218,7 @@
     name: "{{ item.public_ip }}"
     groups: new_host
     ansible_user: "{{ system_user }}"
-  with_items: "{{ ec2.instances.results }}"
+  with_items: "{{ ec2.results.instances }}"
   tags:
     - vpc_create
 
