@@ -198,6 +198,9 @@
   tags:
     - vpc_create
 
+- debug: 
+    var: ec2
+
 - name: Add new ec2 instance to inventory
   add_host:
     name: "{{ item.public_ip }}"
