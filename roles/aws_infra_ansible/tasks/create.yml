@@ -205,7 +205,7 @@
     var: ip
 
 - set_fact:
-    public_ip: "{{ ip[] }}"
+    public_ip: "{{ ip[0] }}"
 
 
 - name: Add new ec2 instance to inventory
