@@ -11,6 +11,9 @@
 - name: Install JBoss and Deploy Apps
   hosts: new_host
   become: true
+  vars:
+    - http_port: 8080
+    - https_port: 8443
   roles:
     - jboss-standalone
     - java-app
