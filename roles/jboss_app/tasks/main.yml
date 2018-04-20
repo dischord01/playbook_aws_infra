@@ -8,7 +8,7 @@
   with_items:
     - rh-maven35
     - git
-    - @jboss-eap7
+    - "@jboss-eap7"
 
 - name: Start EAP
   service: 
