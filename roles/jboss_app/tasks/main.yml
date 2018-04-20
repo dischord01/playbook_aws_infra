@@ -2,7 +2,7 @@
 ---
 
 - name: Install base packages
-  yum:
+  package:
     name: "{{ item }}"
     state: present
   with_items:
