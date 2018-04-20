@@ -199,7 +199,7 @@
     - vpc_create
 
 - set_fact:
-    public_ip: "{{ ec2|json_query('results[*].instances[*].public_ip') }}"
+    public_ip: "{{ ec2|json_query('results[*].instances[*].public_ip[]') }}"
 
 - debug: 
     var: public_ip
