@@ -199,10 +199,14 @@
     - vpc_create
 
 - set_fact:
-    public_ip: "{{ ec2|json_query('results[*].instances[*].public_ip[][]') }}"
+    ip: "{{ ec2|json_query('results[*].instances[*].public_ip[]') }}"
 
 - debug: 
-    var: public_ip
+    var: ip[]
+
+- set_fact:
+    public_ip: ip[]
+
 
 - name: Add new ec2 instance to inventory
   add_host:
