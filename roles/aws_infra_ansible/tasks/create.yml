@@ -202,10 +202,10 @@
     ip: "{{ ec2|json_query('results[*].instances[*].public_ip[]') }}"
 
 - debug: 
-    var: ip[]
+    var: ip
 
 - set_fact:
-    public_ip: ip[]
+    public_ip: "{{ ip[] }}"
 
 
 - name: Add new ec2 instance to inventory
