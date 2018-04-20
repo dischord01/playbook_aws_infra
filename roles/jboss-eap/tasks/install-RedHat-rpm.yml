@@ -1,7 +1,0 @@
-- name: RPM | Install JBOSS
-  yum:
-    name: "{{ jboss_eap_package_list }}"
-    state: present
-  register: jboss_install
-  tags:
-    - jboss_eap

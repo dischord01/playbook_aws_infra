@@ -1,0 +1,27 @@
+# file: roles/jboss_app/tasks/main.yml
+---
+
+- name: Install base packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - rh-maven35
+    - git
+    - @jboss-eap7
+
+- name: Start EAP
+  service: 
+    name: eap7-standalone
+    state: started
+
+- name: Grab the quickstart app
+  git: 
+    repo: "https://github.com/jboss-developer/jboss-eap-quickstarts.git"
+    dest: "/tmp/checkout"
+
+- name: Deploy the code via Maven
+  shell: scl enable rh-maven35 'mvn clean install wildfly:deploy -Dmaven.test.skip=true'
+  args:
+    chdir: "/tmp/checkout/helloworld"
+

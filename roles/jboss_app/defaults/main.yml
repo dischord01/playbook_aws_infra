@@ -1,0 +1,4 @@
+# file: roles/jboss_app/defaults/main.yml
+---
+#
+# foo: default

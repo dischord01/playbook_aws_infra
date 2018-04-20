@@ -1,0 +1,4 @@
+# file: roles/jboss_app/vars/main.yml
+---
+#
+# foo: bar
