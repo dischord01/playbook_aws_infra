@@ -1,5 +1,7 @@
 # file: roles/jboss_app/tasks/main.yml
 ---
+- name: Enable RHSCL
+  command: yum-config-manager --enable rhel-server-rhscl-7-rpms
 
 - name: Install base packages
   package:
