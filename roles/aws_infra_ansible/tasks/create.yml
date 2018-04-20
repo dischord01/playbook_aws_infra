@@ -202,13 +202,13 @@
     var: ec2
 
 - debug: 
-    var: ec2.instances
+    var: ec2.results
 
 - debug: 
     var: ec2.instances[].public_ip
 
 - set_fact:
-    public_ip: "{{ ec2|json_query('instances[*].public_ip') }}"
+    public_ip: "{{ ec2.results|json_query('instances[*].public_ip') }}"
 
 - debug: 
     var: public_ip
