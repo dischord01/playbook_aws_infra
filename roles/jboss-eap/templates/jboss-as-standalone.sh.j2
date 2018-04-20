@@ -1,12 +1,14 @@
 #!/bin/sh
 #
+# {{ ansible_managed }}
+#
 # JBoss standalone control script
 #
 # chkconfig: - 80 20
 # description: JBoss AS Standalone
 # processname: standalone
-# pidfile: /var/run/jboss-as/jboss-as-standalone.pid
-# config: /etc/jboss-as/jboss-as.conf
+# pidfile: {{ jboss_eap_service_data_dir }}/jboss-as-standalone.pid
+# config: {{ jboss_eap_service_conf_file }}
 
 # Source function library.
 . /etc/init.d/functions
@@ -15,14 +17,9 @@
 [ -r /etc/java/java.conf ] && . /etc/java/java.conf
 export JAVA_HOME
 
-##
-# Set the JBoss user
-JBOSS_USER=jboss  
-export JBOSS_USER 
-
 # Load JBoss AS init.d configuration.
 if [ -z "$JBOSS_CONF" ]; then
-  JBOSS_CONF="/etc/jboss-as/jboss-as.conf"
+  JBOSS_CONF="{{ jboss_eap_service_conf_file }}"
 fi
 
 [ -r "$JBOSS_CONF" ] && . "${JBOSS_CONF}"
@@ -30,17 +27,17 @@ fi
 # Set defaults.
 
 if [ -z "$JBOSS_HOME" ]; then
-  JBOSS_HOME=/usr/share/jboss-as
+  JBOSS_HOME={{ jboss_eap_jboss_home }}
 fi
 export JBOSS_HOME
 
 if [ -z "$JBOSS_PIDFILE" ]; then
-  JBOSS_PIDFILE=/var/run/jboss-as/jboss-as-standalone.pid
+  JBOSS_PIDFILE={{ jboss_eap_service_data_dir }}/jboss-as-standalone.pid
 fi
 export JBOSS_PIDFILE
 
 if [ -z "$JBOSS_CONSOLE_LOG" ]; then
-  JBOSS_CONSOLE_LOG=/var/log/jboss-as/console.log
+  JBOSS_CONSOLE_LOG={{ jboss_eap_service_log_dir }}/console.log
 fi
 
 if [ -z "$STARTUP_WAIT" ]; then
@@ -62,7 +59,7 @@ prog='jboss-as'
 CMD_PREFIX=''
 
 if [ ! -z "$JBOSS_USER" ]; then
-  if [ -x /etc/rc.d/init.d/functions ]; then
+  if [ -r /etc/rc.d/init.d/functions ]; then
     CMD_PREFIX="daemon --user $JBOSS_USER"
   else
     CMD_PREFIX="su - $JBOSS_USER -c"
@@ -77,7 +74,7 @@ start() {
       echo -n "$prog is already running"
       failure
       echo
-      return 1 
+      return 1
     else
       rm -f $JBOSS_PIDFILE
     fi
@@ -91,10 +88,10 @@ start() {
   #$CMD_PREFIX JBOSS_PIDFILE=$JBOSS_PIDFILE $JBOSS_SCRIPT &
 
   if [ ! -z "$JBOSS_USER" ]; then
-    if [ -x /etc/rc.d/init.d/functions ]; then
-      daemon --user $JBOSS_USER LAUNCH_JBOSS_IN_BACKGROUND=1 JBOSS_PIDFILE=$JBOSS_PIDFILE $JBOSS_SCRIPT -c $JBOSS_CONFIG 2>&1 > $JBOSS_CONSOLE_LOG &
+    if [ -r /etc/rc.d/init.d/functions ]; then
+      daemon --user $JBOSS_USER LAUNCH_JBOSS_IN_BACKGROUND=1 JBOSS_PIDFILE=$JBOSS_PIDFILE $JBOSS_SCRIPT -c $JBOSS_CONFIG > $JBOSS_CONSOLE_LOG 2>&1 &
     else
-      su - $JBOSS_USER -c "LAUNCH_JBOSS_IN_BACKGROUND=1 JBOSS_PIDFILE=$JBOSS_PIDFILE $JBOSS_SCRIPT -c $JBOSS_CONFIG" 2>&1 > $JBOSS_CONSOLE_LOG &
+      su - $JBOSS_USER -c "LAUNCH_JBOSS_IN_BACKGROUND=1 JBOSS_PIDFILE=$JBOSS_PIDFILE $JBOSS_SCRIPT -c $JBOSS_CONFIG" > $JBOSS_CONSOLE_LOG 2>&1 &
     fi
   fi
 
@@ -103,15 +100,22 @@ start() {
 
   until [ $count -gt $STARTUP_WAIT ]
   do
-    grep 'JBoss AS.*started in' $JBOSS_CONSOLE_LOG > /dev/null 
+    grep 'JBAS015874:' $JBOSS_CONSOLE_LOG > /dev/null
     if [ $? -eq 0 ] ; then
       launched=true
       break
-    fi 
+    fi
     sleep 1
     let count=$count+1;
   done
-  
+
+  if [ "$launched" = "false" ] ; then
+    echo "$prog failed to startup in the time allotted"
+    failure
+    echo
+    return 7
+  fi
+
   success
   echo
   return 0
